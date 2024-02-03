@@ -19,5 +19,4 @@ public class TestCustomerServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.from(CustomerServiceApplication::main).with(TestCustomerServiceApplication.class).run(args);
 	}
-
 }
