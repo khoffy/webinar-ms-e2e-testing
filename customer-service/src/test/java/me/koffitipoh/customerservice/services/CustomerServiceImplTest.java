@@ -19,7 +19,7 @@ import java.util.Optional;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.Mockito.when;
-@Profile("test")
+
 @ExtendWith(MockitoExtension.class)
 class CustomerServiceImplITest {
 
@@ -78,20 +78,14 @@ class CustomerServiceImplITest {
     void shouldGetAllCustomers() {
         // Given
         List<Customer> customers = List.of(
-                Customer.builder().id(1L).firstName("Jack").lastName("Dupont").email("jackdupont@gmail.com")
-                        .build(),
-                Customer.builder().id(2L).firstName("Jacky").lastName("Dupont").email("jackydupont@gmail.com")
-                        .build(),
-                Customer.builder().id(3L).firstName("Jackeline").lastName("Dupont").email("jackelinedupont@gmail.com")
-                        .build()
+                Customer.builder().id(1L).firstName("Jack").lastName("Dupont").email("jackdupont@gmail.com").build(),
+                Customer.builder().id(2L).firstName("Jacky").lastName("Dupont").email("jackydupont@gmail.com").build(),
+                Customer.builder().id(3L).firstName("Jackeline").lastName("Dupont").email("jackelinedupont@gmail.com").build()
         );
         List<CustomerDTO> customerDTOs = List.of(
-                CustomerDTO.builder().id(1L).firstName("Jack").lastName("Dupont").email("jackdupont@gmail.com")
-                        .build(),
-                CustomerDTO.builder().id(2L).firstName("Jacky").lastName("Dupont").email("jackydupont@gmail.com")
-                        .build(),
-                CustomerDTO.builder().id(3L).firstName("Jackeline").lastName("Dupont").email("jackelinedupont@gmail.com")
-                        .build()
+                CustomerDTO.builder().id(1L).firstName("Jack").lastName("Dupont").email("jackdupont@gmail.com").build(),
+                CustomerDTO.builder().id(2L).firstName("Jacky").lastName("Dupont").email("jackydupont@gmail.com").build(),
+                CustomerDTO.builder().id(3L).firstName("Jackeline").lastName("Dupont").email("jackelinedupont@gmail.com").build()
         );
 
         when(mockCustomerRepository.findAll()).thenReturn(customers);
@@ -122,7 +116,6 @@ class CustomerServiceImplITest {
         CustomerDTO customerById = customerServiceUnderTest.findCustomerById(1L);
         // Then
         assertThat(customerById).usingRecursiveComparison().isEqualTo(expected);
-
     }
 
     @Test
@@ -134,6 +127,5 @@ class CustomerServiceImplITest {
         // When
         assertThatThrownBy(() -> customerServiceUnderTest.findCustomerById(customerId))
                 .isInstanceOf(CustomerNotFoundException.class);
-
     }
 }

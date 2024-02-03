@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -29,8 +28,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     private CustomerRepository customerRepository;
     private CustomerMapper customerMapper;
-
-
     @Override
     public CustomerDTO saveNewCustomer(CustomerDTO customerDTO) throws EmailAlreadyExistsException {
         log.info(String.format("Saving new customer => %s", customerDTO.toString()));
@@ -61,7 +58,6 @@ public class CustomerServiceImpl implements CustomerService {
         List<Customer> byFirstNameContainsIgnoreCase = customerRepository.findByFirstNameContainsIgnoreCase(keyword);
         return customerMapper.fromListCustomers(byFirstNameContainsIgnoreCase);
     }
-
     @Override
     public CustomerDTO updateCustomer(CustomerDTO customerDTO) throws CustomerNotFoundException {
         Optional<Customer> optionalOfCustomer = customerRepository.findById(customerDTO.getId());
@@ -72,7 +68,6 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setEmail(customerDTO.getEmail());
         return customerMapper.fromCustomer(customerRepository.saveAndFlush(customer));
     }
-
     @Override
     public void deleteCustomer(Long id) throws CustomerNotFoundException {
         Optional<Customer> byId = customerRepository.findById(id);
@@ -83,7 +78,6 @@ public class CustomerServiceImpl implements CustomerService {
     public void setCustomerRepository(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
-
     @Autowired
     public void setCustomerMapper(CustomerMapper customerMapper) {
         this.customerMapper = customerMapper;
