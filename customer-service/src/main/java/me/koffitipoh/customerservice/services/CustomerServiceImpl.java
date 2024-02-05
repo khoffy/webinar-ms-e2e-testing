@@ -1,6 +1,7 @@
 package me.koffitipoh.customerservice.services;
 
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import me.koffitipoh.customerservice.dto.CustomerDTO;
 import me.koffitipoh.customerservice.entities.Customer;
@@ -11,6 +12,7 @@ import me.koffitipoh.customerservice.repositories.CustomerRepository;
 import me.koffitipoh.customerservice.services.interfaces.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -58,9 +60,10 @@ public class CustomerServiceImpl implements CustomerService {
         List<Customer> byFirstNameContainsIgnoreCase = customerRepository.findByFirstNameContainsIgnoreCase(keyword);
         return customerMapper.fromListCustomers(byFirstNameContainsIgnoreCase);
     }
+
     @Override
-    public CustomerDTO updateCustomer(CustomerDTO customerDTO) throws CustomerNotFoundException {
-        Optional<Customer> optionalOfCustomer = customerRepository.findById(customerDTO.getId());
+    public CustomerDTO updateCustomer(Long customerId, CustomerDTO customerDTO) throws CustomerNotFoundException {
+        Optional<Customer> optionalOfCustomer = customerRepository.findById(customerId);
         if (optionalOfCustomer.isEmpty()) throw new CustomerNotFoundException();
         Customer customer = optionalOfCustomer.get();
         customer.setFirstName(customerDTO.getFirstName());
