@@ -27,8 +27,8 @@ public class CustomerRestController {
     public ResponseEntity<CustomerDTO> getOneById(@PathVariable Long id) {
         return new ResponseEntity<>(customerService.findCustomerById(id), HttpStatus.OK);
     }
-    @GetMapping("/{keyword}")
-    public ResponseEntity<List<CustomerDTO>> searchByKeyword(@PathVariable String keyword) {
+    @GetMapping("/search")
+    public ResponseEntity<List<CustomerDTO>> searchByKeyword(@RequestParam String keyword) {
         return new ResponseEntity<>(customerService.searchCustomers(keyword), HttpStatus.OK);
     }
     @PostMapping

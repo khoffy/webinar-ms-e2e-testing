@@ -52,6 +52,15 @@ class CustomerRestControllerTest {
                 .andExpect(MockMvcResultMatchers.content().json(objectMapper.writeValueAsString(customers)));
     }
     @Test
+    void searchCustomers() throws Exception {
+        String keyword = "a";
+        when(customerService.searchCustomers(keyword)).thenReturn(customers);
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/customers/search?keyword=" +keyword))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.size()", Matchers.is(3)))
+                .andExpect(MockMvcResultMatchers.content().json(objectMapper.writeValueAsString(customers)));
+    }
+    @Test
     void shouldGetCustomerById() throws Exception {
         Long id = 1L;
         when(customerService.findCustomerById(id)).thenReturn(customers.getFirst());

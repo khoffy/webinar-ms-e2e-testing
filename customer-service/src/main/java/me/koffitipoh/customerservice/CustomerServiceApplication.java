@@ -19,7 +19,7 @@ public class CustomerServiceApplication {
 	CommandLineRunner commandLineRunner(CustomerRepository customerRepository) {
 		return args -> {
 			customerRepository.save(
-					Customer.builder().firstName("Koffi").lastName("Tipoh").email("koffiah.tipoh@gmail.com")
+					Customer.builder().firstName("Koffiah").lastName("Tipoh").email("koffiah.tipoh@gmail.com")
 							.build());
 			customerRepository.save(
 					Customer.builder().firstName("Luffy").lastName("Monkey D.").email("luffy.monkeyD@gmail.com")
