@@ -1,9 +1,19 @@
+version: '3.7'
 services:
   postgres:
     image: 'postgres:latest'
     environment:
-      - 'POSTGRES_DB=customers-db'
+      - 'POSTGRES_DB=customers_db'
       - 'POSTGRES_PASSWORD=1234'
-      - 'POSTGRES_USER=khoffy'
+      - 'POSTGRES_USER=koffi'
     ports:
       - '5432:5432'
+
+  pgadmin:
+    image: 'dpage/pgadmin4:latest'
+    environment:
+      PGADMIN_DEFAULT_EMAIL: koffiah.tipoh@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: 1234
+      PGADMIN_LISTEN_PORT: 5050
+    ports:
+      - '5050:5050'
